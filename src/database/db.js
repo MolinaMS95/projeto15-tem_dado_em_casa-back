@@ -11,6 +11,7 @@ try {
   console.log(err);
 }
 
-const db = mongoClient.db(process.env.DATABASE_NAME);
+const db = mongoClient.db("temdadoemcasa");
 export const usersCollection = db.collection("users");
 export const sessionsCollection = db.collection("sessions");
+export const productsCollection = db.collection("products");
