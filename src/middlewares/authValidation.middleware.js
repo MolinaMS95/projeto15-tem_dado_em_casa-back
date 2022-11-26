@@ -10,8 +10,11 @@ export async function authValidation(req, res, next) {
 
   try {
     const session = await sessionsCollection.findOne({ token });
+    if(!session){
+      return res.sendStatus(401);
+    }
+
     const user = await usersCollection.findOne({ _id: session?.userId });
-    console.log(session);
     if (!user) {
       return res.sendStatus(401);
     }
