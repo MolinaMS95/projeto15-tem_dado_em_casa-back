@@ -4,12 +4,14 @@ import { cartSchema } from "../models/cart.model.js";
 
 export async function cartSchemaValidation(req, res, next) {
   const user = req.user;
-  const { gameId } = req.body;
+  const gameId = req.body.game;
 
   try {
-    const game = await productsCollection.findOne({ _id: new ObjectId(gameId) });
+    const game = await productsCollection.findOne({
+      _id: new ObjectId(gameId),
+    });
     if (!game) {
-      return res.sendStatus(401);
+      return res.sendStatus(404);
     }
 
     const userCart = { userId: user._id, gameId: gameId, price: game.price };
