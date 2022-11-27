@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { usersCollection, sessionsCollection } from "../database/db.js";
 import { v4 as uuidV4 } from "uuid";
+import { ObjectId } from "mongodb";
 
 export async function signUp(req, res) {
   const user = req.body;
@@ -16,19 +17,23 @@ export async function signUp(req, res) {
 }
 
 export async function signIn(req, res) {
-  const { email, password } = req.body;
+  const user = req.userSignin;
   const token = uuidV4();
 
   try {
-    const userExists = await usersCollection.findOne({ email });
+    const sessionExists = await sessionsCollection.findOne({ userId: new ObjectId(user._id) });
+    if (sessionExists) {
+      await sessionsCollection.deleteOne({ userId: new ObjectId(user._id) });
+    }
+
     await sessionsCollection.insertOne({
       token,
-      userId: userExists._id,
+      userId: user._id,
     });
 
     const responseObj = {
       token: token,
-      user: userExists.name,
+      user: user.name,
     };
 
     res.send(responseObj);
