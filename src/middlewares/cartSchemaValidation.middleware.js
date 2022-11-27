@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { cartCollection } from "../database/db";
+import { productsCollection } from "../database/db.js";
 import { cartSchema } from "../models/cart.model.js";
 
 export async function cartSchemaValidation(req, res, next) {
@@ -7,7 +7,7 @@ export async function cartSchemaValidation(req, res, next) {
   const { gameId } = req.body;
 
   try {
-    const game = await cartCollection.findOne({ _id: new ObjectId(gameId) });
+    const game = await productsCollection.findOne({ _id: new ObjectId(gameId) });
     if (!game) {
       return res.sendStatus(401);
     }

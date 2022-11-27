@@ -1,5 +1,4 @@
-import { ObjectId } from "mongodb";
-import { cartCollection, productsCollection } from "../database/db.js";
+import { cartCollection } from "../database/db.js";
 
 export async function gameExistsValidation(req, res, next) {
   const userId = req.user._id;
