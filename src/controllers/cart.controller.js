@@ -13,3 +13,27 @@ export async function getCart(req, res) {
     res.sendStatus(500);
   }
 }
+
+export async function insertProduct(req, res) {
+  const userCart = req.userCart;
+
+  try {
+    await cartCollection.insertOne(userCart);
+    return res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(500);
+  }
+}
+
+export async function removeProduct(req, res) {
+  const userCart = req.product;
+
+  try {
+    await cartCollection.deleteOne(userCart);
+    return res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+}
