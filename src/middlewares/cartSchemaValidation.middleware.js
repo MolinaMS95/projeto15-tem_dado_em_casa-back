@@ -14,7 +14,12 @@ export async function cartSchemaValidation(req, res, next) {
       return res.sendStatus(404);
     }
 
-    const userCart = { userId: user._id, gameId: gameId, price: game.price };
+    const userCart = {
+      userId: user._id,
+      gameId: gameId,
+      price: game.price,
+      gameName: game.name,
+    };
     const { error } = cartSchema.validate(userCart, { abortEarly: false });
 
     if (error) {
