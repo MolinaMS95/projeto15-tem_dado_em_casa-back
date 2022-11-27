@@ -20,6 +20,7 @@ export async function cartSchemaValidation(req, res, next) {
       price: game.price,
       gameName: game.name,
     };
+    
     const { error } = cartSchema.validate(userCart, { abortEarly: false });
 
     if (error) {
