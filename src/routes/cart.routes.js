@@ -9,6 +9,6 @@ router.use(authValidation);
 
 router.get("/cart", getCart);
 router.post("/cart", cartSchemaValidation, insertProduct);
-router.delete("/cart", gameExistsValidation, removeProduct);
+router.delete("/cart/:id", gameExistsValidation, removeProduct);
 
 export default router;
