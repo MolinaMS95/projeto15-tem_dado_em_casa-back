@@ -37,3 +37,15 @@ export async function removeProduct(req, res) {
     res.sendStatus(500);
   }
 }
+
+export async function clearCart(req, res) {
+  const user = req.user;
+
+  try {
+    await cartCollection.deleteMany({ userId: new ObjectId(user._id) });
+    return res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+}
