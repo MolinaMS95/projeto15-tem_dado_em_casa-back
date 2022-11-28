@@ -8,7 +8,7 @@ export async function orderSchemaValidation(req, res, next) {
   const address = req.body.address;
   const phone = req.body.phone;
   const items = [];
-  items.forEach((e) => {
+  cart.forEach((e) => {
     items.push(e.gameId);
   });
   try {
