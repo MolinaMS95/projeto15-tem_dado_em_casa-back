@@ -2,7 +2,7 @@ import { orderSchema } from "../models/orders.model.js";
 
 export async function orderSchemaValidation(req, res, next) {
   const user = req.user;
-  const { items } = req.body.items;
+  const items = req.body.items;
   const total = req.body.total;
   const payment = req.body.payment;
   const address = req.body.address;
